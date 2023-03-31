@@ -81,7 +81,7 @@
                     <input type="hidden" value="COD" name="payment_mode">
                     <div class="mt-3">
                         <button type="submit" class="btn btn-success w-100">COD  & Place Order</button>
-                        <div id="paypal-button-container"><button class="btn btn-primary">Pay Pal</button></div>
+                        <div id="paypal-button-container" class="mt-2"></div>
                     </div>
                 {% else %}
                 <h6>Your cart is empty</h6>
@@ -94,36 +94,49 @@
 </div>
 {% endblock content %}
 {% block scripts %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://www.paypal.com/sdk/js?client-id=AbI-6VstRcp63VtsgRY5HUdiK9T6wTUPr0EH84t7KU-z6zMZVObeuunMFARzRnPi-FtkIlq-Hw3ZB7bA&currency=USD"></script>
 <script>
       paypal.Buttons({
+        onClick:function(data,actions){
+              var fname=$("[name='fname']").val();
+              var lname=$("[name='lname']").val();
+              var email=$("[name='email']").val();
+              var mobilenumber=$("[name='mobilenumber']").val();
+              var address=$("[name='address']").val();
+              var city=$("[name='city']").val();
+              var state=$("[name='state']").val();
+              var country=$("[name='country']").val();
+              var pincode=$("[name='pincode']").val();
+              var token=$("[name='csrfmiddlewaretoken']").val();
+
+              if(fname == "" || lname == "" || email == "" || mobilenumber == "" || address == "" || city == "" || state==""||country==""||pincode==""){
+                 swal("Alert!","All fields are mandator","Error");
+                 return false;
+              }else{
+                  return true;
+              }
+
+        },
+
         // Order is created on the server and the order id is returned
         createOrder: (data, actions) => {
-          return fetch("/api/orders", {
-            method: "post",
-            // use the "body" param to optionally pass additional order information
-            // like product skus and quantities
-          })
-          .then((response) => response.json())
-          .then((order) => order.id);
+          return actions.order.create({
+          purchase_units:[{
+             amount:{
+                 value:'{{total_price}}'
+                 }
+             }]
+           });
         },
-        // Finalize the transaction on the server after payer approval
-        onApprove: (data, actions) => {
-          return fetch(`/api/orders/${data.orderID}/capture`, {
-            method: "post",
-          })
-          .then((response) => response.json())
-          .then((orderData) => {
-            // Successful capture! For dev/demo purposes:
-            console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-            const transaction = orderData.purchase_units[0].payments.captures[0];
-            alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
-            // When ready to go live, remove the alert and show a success message within this page. For example:
-            // const element = document.getElementById('paypal-button-container');
-            // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-            // Or go to another URL:  actions.redirect('thank_you.html');
-          });
-        }
+
+        onApprove:function(data,actions){
+               return actions.order.capture().then(function(orderData){
+                         console.log('Capture result', orderData,JSON.stringify(orderData,null,2));
+                         var transaction = orderData.purchase_units[0].payments.captures[0];
+                         alert('Transaction '+transaction.status+': '+transaction.id);
+                         });
+                       }
       }).render('#paypal-button-container');
     </script>
 {% endblock scripts %}
