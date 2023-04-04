@@ -89,4 +89,12 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+class Comment(models.Model):
+    product=models.ForeignKey(Product,on_delete=models.CASCADE,related_name="comments")
+    commenter_name=models.ForeignKey(User,on_delete=models.CASCADE)
+    comment_body=models.TextField()
+    comment_image=models.ImageField(upload_to=get_file_path,null=True,blank=True)
+    created_at=models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return "%s %s" %(self.product.name,self.commenter_name.username)

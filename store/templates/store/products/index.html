@@ -43,11 +43,15 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-7">
                                         <br/>
                                         {% if data.quantity %}
                                         <button type="submit" class="btn btn-primary me-3 float-start addToCartBtn">Add to Cart</button>
                                         {% endif %}
+                                    </div>
+                                    <div class="col-md-5">
+                                        <a class="btn btn-info" href="{% url  'comment' data.id %}" >Comment</a>
+
                                     </div>
 
                                 </div>

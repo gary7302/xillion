@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7c2rn5bz0af_n1e01b!+(1kd^ksf5#p964_o)&8vs_2n!k#f63
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'store',
+    'stripe',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR/ 'static']
 MEDIA_URL='/images/'
 MEDIA_ROOT=BASE_DIR/'static'
+
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51MrhFfSHZAJJXMru07dwrFd6jzDu3nWua2HbitIWqon3prLozRrjpbFLmBtXcFhCjU8iInD3B7YkheQRWZTrMeKf00oX0i2d5O'
+STRIPE_SECRET_KEY = 'sk_test_51MrhFfSHZAJJXMruYFXUPbEM3Edu1WmjQ0BszczBCkfpqiZigNPKMAwQUrjDNs2nBUJLKNOcQ3GjNNjUr5Q3hGdG00R7bYLdM2'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
