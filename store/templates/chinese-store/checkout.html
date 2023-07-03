@@ -1,0 +1,155 @@
+{% extends 'store/layouts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-3">
+    <form action="{% url 'placeorder' %}" method="post">
+        {% csrf_token %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h6>Basic Details</h6>
+                    <hr/>
+                    <div class="row checkoutform">
+                        <div class="col-md-6">
+                            <label>First Name :</label>
+                            <input type="text" required name="fname" value="{{request.user.first_name}}" placeholder="Enter your first name" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Last Name :</label>
+                            <input type="text" required name="lname" value="{{request.user.last_name}}" placeholder="Enter your last name" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>E-mail :</label>
+                            <input type="text" required name='email' value="{{request.user.email}}" placeholder="Enter your email" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Mobile Number :</label>
+                            <input type="phonenumber" required name="mobilenumber" value="{{ userprofile.mobilenumber }}" placeholder="Enter your mobile number" class="form-control" />
+                        </div>
+                        <div class="col-md-12">
+                            <label>Address :</label>
+                            <input type="text" required name="address" value="{{ userprofile.address }}" placeholder="Enter your B.No.,Street No." class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>City Name :</label>
+                            <input type="text" required name="city" value="{{ userprofile.city }}" placeholder="Enter your city name" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>State Name :</label>
+                            <input type="text" required name="state" value="{{ userprofile.state }}" placeholder="Enter your state name" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Country Name :</label>
+                            <input type="text" required name="country" value="{{ userprofile.country }}" placeholder="Enter your country name" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Enter Your Pincode :</label>
+                            <input type="text" required name="pincode" value="{{ userprofile.pincode }}" placeholder="Enter your pincode" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Submit your cancer proof certificate :</label>
+                            <input type="file" required name="cancer" value="{{ userprofile.cancer }}" placeholder="cancer proof" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Subit your ID card :</label>
+                            <input type="file" required name="proof" value="{{ userprofile.proof }}" placeholder="submit your ID" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Write your feedback :</label>
+                            <input type="text" required name="letter" value="{{ userprofile.letter }}" placeholder="Write your feedback" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card shadow ">
+                <div class="card-body">
+                <h6 class="text-center">Order Summary</h6>
+                <hr />
+                {% if cartitems %}
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                    <th>Name </th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in cartitems %}
+                    <tr>
+                    <td>
+                        <img src="{{item.product.image.url}}" height="40px" width="40px">
+                        {{item.product.name}}</td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.product.price}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                    <h6>Total Amount : {{total_price}}</h6>
+                    <input type="hidden" value="COD" name="payment_mode">
+                    <div class="mt-3">
+                        <button type="submit" class="btn btn-success w-100">COD  & Place Order</button>
+                        <div id="paypal-button-container" class="mt-2"></div>
+                        <img src="data:image/jpeg;base64,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">
+                    </div>
+                {% else %}
+                <h6>Your cart is empty</h6>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+        </form>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AbI-6VstRcp63VtsgRY5HUdiK9T6wTUPr0EH84t7KU-z6zMZVObeuunMFARzRnPi-FtkIlq-Hw3ZB7bA&currency=USD"></script>
+<script>
+      paypal.Buttons({
+        onClick:function(data,actions){
+              var fname=$("[name='fname']").val();
+              var lname=$("[name='lname']").val();
+              var email=$("[name='email']").val();
+              var mobilenumber=$("[name='mobilenumber']").val();
+              var address=$("[name='address']").val();
+              var city=$("[name='city']").val();
+              var state=$("[name='state']").val();
+              var country=$("[name='country']").val();
+              var pincode=$("[name='pincode']").val();
+              var token=$("[name='csrfmiddlewaretoken']").val();
+
+              if(fname == "" || lname == "" || email == "" || mobilenumber == "" || address == "" || city == "" || state==""||country==""||pincode==""){
+                 swal("Alert!","All fields are mandator","Error");
+                 return false;
+              }else{
+                  return true;
+              }
+
+        },
+
+        // Order is created on the server and the order id is returned
+        createOrder: (data, actions) => {
+          return actions.order.create({
+          purchase_units:[{
+             amount:{
+                 value:'{{total_price}}'
+                 }
+             }]
+           });
+        },
+
+        onApprove:function(data,actions){
+               return actions.order.capture().then(function(orderData){
+                         console.log('Capture result', orderData,JSON.stringify(orderData,null,2));
+                         var transaction = orderData.purchase_units[0].payments.captures[0];
+                         alert('Transaction '+transaction.status+': '+transaction.id);
+                         });
+                       }
+      }).render('#paypal-button-container');
+    </script>
+{% endblock scripts %}
