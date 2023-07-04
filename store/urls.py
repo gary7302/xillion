@@ -1,10 +1,10 @@
 from django.urls import path
 from .views import *
-from store.controller import authview,cartview,checkview,paymentview
+from store.controller import authview,cartview,checkview,paymentview,chineseview
 
 urlpatterns = [
     path('',home,name='home'),
-    path('type/<str:slug>',type,name='type'),
+    # path('type/<str:slug>',type,name='type'),
     path('register',authview.register,name='register'),
     path('login',authview.loginpage,name='loginpage'),
     path('logout',authview.logoutpage,name='logoutpage'),
@@ -12,10 +12,26 @@ urlpatterns = [
     path('cart',cartview.showCart,name='cart'),
     path('update-cart',cartview.updatecart,name="updatecart"),
     path('delete-cart-item',cartview.deletecartitem,name="deletecartitem"),
+    path('getpatch',getpatch,name='getpatch'),
+    path('usepatch',usepatch,name='usepatch'),
+    path('details',details,name='details'),
     path('checkout',checkview.checkout,name='checkout'),
     path('place-order',checkview.placeorder,name="placeorder"),
     path('charge', paymentview.charge, name='charge'),
     path('success/', paymentview.success, name='success'),
-    path('type/comment/<int:id>/', comment, name='comment'),
+    path('comment/<int:id>/', comment, name='comment'),
     path('addComment/<int:id>', addComment, name='addComment'),
+    path('chinese',chineseview.home,name='chinese'),
+    path('chineseregister', authview.chineseregister, name='chineseregister'),
+    path('chineselogin', authview.chineseloginpage, name='chineselogin'),
+    path('chinese-add-to-cart', cartview.chineseaddtocart, name='chineseaddtocart'),
+    path('chinesecart', cartview.chineseshowCart, name='chinesecart'),
+    path('chinese-update-cart', cartview.chineseupdatecart, name="chineseupdatecart"),
+    path('chinese-delete-cart-item', cartview.chinesedeletecartitem, name="chinesedeletecartitem"),
+    path('chinesegetpatch', chineseview.getpatch, name='chinesegetpatch'),
+    path('chineseusepatch', chineseview.usepatch, name='chineseusepatch'),
+    path('chinesedetails', chineseview.details, name='chinesedetails'),
+    path('chinesecheckout', checkview.chinesecheckout, name='chinesecheckout'),
+    path('chinesecomment/<int:id>', chineseview.comment, name='chinesecomment'),
+    path('chineseaddComment/<int:id>', chineseview.addComment, name='chineseaddComment'),
 ]

@@ -40,5 +40,36 @@ def logoutpage(request):
         messages.success(request,'Logged out successfully')
     return redirect('/')
 
+def chineseregister(request):
+    form=CustomUserForm()
+    if request.method == 'POST':
+        form=CustomUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request,'Register Successfully! Continue with Login')
+            return redirect('/chineselogin')
+    context={'form':form}
+    return render(request,'chinese-store/auth/register.html',context)
+
+def chineseloginpage(request):
+    if request.user.is_authenticated:
+        messages.warning(request,'You are already logged in')
+        return redirect('/chinese')
+    else:
+
+        if request.method == 'POST':
+            name = request.POST.get('username')
+            passwd = request.POST.get('password')
+            user = authenticate(request, username=name, password=passwd)
+
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Logged in successfully')
+                return redirect('/chinese')
+            else:
+                messages.error(request, 'Invalid username or password')
+                return redirect('/chineselogin')
+        return render(request, 'chinese-store/auth/login.html')
+
 
 

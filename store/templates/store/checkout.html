@@ -47,6 +47,18 @@
                             <label>Enter Your Pincode :</label>
                             <input type="text" required name="pincode" value="{{ userprofile.pincode }}" placeholder="Enter your pincode" class="form-control" />
                         </div>
+                        <div class="col-md-6">
+                            <label>Submit your cancer proof certificate :</label>
+                            <input type="file" required name="cancer" value="{{ userprofile.cancer }}" placeholder="cancer proof" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Subit your ID card :</label>
+                            <input type="file" required name="proof" value="{{ userprofile.proof }}" placeholder="submit your ID" class="form-control" />
+                        </div>
+                        <div class="col-md-6">
+                            <label>Write your feedback :</label>
+                            <input type="text" required name="letter" value="{{ userprofile.letter }}" placeholder="Write your feedback" class="form-control" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,10 +121,13 @@
               var state=$("[name='state']").val();
               var country=$("[name='country']").val();
               var pincode=$("[name='pincode']").val();
+              var cancer=$("[name='cancer']").val();
+              var proof=$("[name='proof']").val();
+              var letter=$("[name='letter']").val();
               var token=$("[name='csrfmiddlewaretoken']").val();
 
-              if(fname == "" || lname == "" || email == "" || mobilenumber == "" || address == "" || city == "" || state==""||country==""||pincode==""){
-                 swal("Alert!","All fields are mandator","Error");
+              if(fname == "" || lname == "" || email == "" || mobilenumber == "" || address == "" || city == "" || state=="" || country=="" || pincode=="" || cancer=="" || proof=="" || letter==""){
+                 swal("Alert!","All fields are mandatory","Error");
                  return false;
               }else{
                   return true;

@@ -30,6 +30,54 @@
           <a class="nav-link {% if request.resolver_match.url_name == 'register' %} active{% endif %}" href="register">SignUp</a>
         </li>
         {% endif %}
+        <li class="nav-item dropdown" style="height:cover">
+          <a class="nav-link  active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+           Languages
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <li><a class="dropdown-item" href="/">English</a></li>
+            <li><a class="dropdown-item" href="{% url 'chinese' %}">Chinese</a></li>
+            <li><a class="dropdown-item" href="/">Hindi</a></li>
+            <li><a class="dropdown-item" href="/">Spanish</a></li>
+            <li><a class="dropdown-item" href="/">French</a></li>
+            <li><a class="dropdown-item" href="/">Arabic</a></li>
+            <li><a class="dropdown-item" href="/">Bengali</a></li>
+            <li><a class="dropdown-item" href="/">Russian</a></li>
+            <li><a class="dropdown-item" href="/">Portuguese</a></li>
+            <li><a class="dropdown-item" href="/">Urdu</a></li>
+            <li><a class="dropdown-item" href="/">Indonesian</a></li>
+            <li><a class="dropdown-item" href="/">German</a></li>
+            <li><a class="dropdown-item" href="/">Japanese</a></li>
+            <li><a class="dropdown-item" href="/">Nigerian</a></li>
+            <li><a class="dropdown-item" href="/">Marathi</a></li>
+            <li><a class="dropdown-item" href="/">Telugu</a></li>
+            <li><a class="dropdown-item" href="/">Turkish</a></li>
+            <li><a class="dropdown-item" href="/">Tamil</a></li>
+            <li><a class="dropdown-item" href="/">Vietnamese</a></li>
+            <li><a class="dropdown-item" href="/">Tagalog</a></li>
+            <li><a class="dropdown-item" href="/">Korean</a></li>
+            <li><a class="dropdown-item" href="/">Iranian</a></li>
+            <li><a class="dropdown-item" href="/">Hausa</a></li>
+            <li><a class="dropdown-item" href="/">Egyptian</a></li>
+            <li><a class="dropdown-item" href="/">Swahili</a></li>
+            <li><a class="dropdown-item" href="/">Javanese</a></li>
+            <li><a class="dropdown-item" href="/">Italian</a></li>
+            <li><a class="dropdown-item" href="/">Punjabi</a></li>
+            <li><a class="dropdown-item" href="/">Kannada</a></li>
+            <li><a class="dropdown-item" href="/">Gujarati</a></li>
+            <li><a class="dropdown-item" href="/">Thai</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="getpatch">GetPatch</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="usepatch">UsePatch</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="details">Theory</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link {% if request.resolver_match.url_name == 'cart' %} active{% endif %}" href="cart">Cart</a>
         </li>

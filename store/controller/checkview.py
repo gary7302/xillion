@@ -18,7 +18,7 @@ def checkout(request):
     for item in cartitems:
         total_price=total_price+item.product.price*item.quantity
 
-    userprofile=Profile.objects.filter(user=request.user).first()
+    userprofile=Profil.objects.filter(user=request.user).first()
 
     context={'cartitems':cartitems,'total_price':total_price,'userprofile':userprofile}
     return render(request,'store/checkout.html',context)
@@ -32,8 +32,8 @@ def placeorder(request):
             currentuser.last_name=request.POST.get('lname')
             currentuser.save()
 
-        if not Profile.objects.filter(user=request.user):
-            userprofile=Profile()
+        if not Profil.objects.filter(user=request.user):
+            userprofile=Profil()
             userprofile.user=request.user
             userprofile.mobilenumber = request.POST.get('mobilenumber')
             userprofile.address = request.POST.get('address')
@@ -41,6 +41,9 @@ def placeorder(request):
             userprofile.state = request.POST.get('state')
             userprofile.country = request.POST.get('country')
             userprofile.pincode = request.POST.get('pincode')
+            userprofile.cancer=request.POST.get('cancer')
+            userprofile.proof = request.POST.get('proof')
+            userprofile.letter = request.POST.get('letter')
             userprofile.save()
 
 
@@ -55,6 +58,9 @@ def placeorder(request):
         neworder.state = request.POST.get('state')
         neworder.country = request.POST.get('country')
         neworder.pincode = request.POST.get('pincode')
+        neworder.cancer=request.POST.get('cancer')
+        neworder.proof=request.POST.get('proof')
+        neworder.letter=request.POST.get('letter')
         neworder.payment_mode=request.POST.get('payment_mode')
 
         cart=Cart.objects.filter(user=request.user)
@@ -91,3 +97,20 @@ def placeorder(request):
 
 
     return redirect("/")
+
+@login_required(login_url='chineselogin')
+def chinesecheckout(request):
+    rawcart=Cart.objects.filter(user=request.user)
+    for item in rawcart:
+        if item.quantity > item.product.quantity:
+            Cart.objects.delete(id=item.id)
+
+    cartitems=Cart.objects.filter(user=request.user)
+    total_price=0
+    for item in cartitems:
+        total_price=total_price+item.product.price*item.quantity
+
+    userprofile=Profil.objects.filter(user=request.user).first()
+
+    context={'cartitems':cartitems,'total_price':total_price,'userprofile':userprofile}
+    return render(request,'chinese-store/checkout.html',context)

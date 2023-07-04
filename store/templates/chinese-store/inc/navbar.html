@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'home' %} active{% endif %}" aria-current="page" href="/">Home</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'chinese' %}">Home</a>
         </li>
         {% if request.user.is_authenticated %}
         <li class="nav-item dropdown">
@@ -18,16 +18,16 @@
             <li><a class="dropdown-item" href="#">Action</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="logout">Logout</a></li>
+            <li><a class="dropdown-item" href="{% url 'logoutpage' %}">Logout</a></li>
           </ul>
         </li>
 
         {% else %}
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'loginpage' %} active{% endif %}" href="login">Login</a>
+          <a class="nav-link active" href="{% url 'chineselogin' %}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'register' %} active{% endif %}" href="register">SignUp</a>
+          <a class="nav-link active" href="{% url 'chineseregister' %}">SignUp</a>
         </li>
         {% endif %}
         <li class="nav-item dropdown" style="height:cover">
@@ -37,7 +37,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
             <li><a class="dropdown-item" href="/">English</a></li>
-            <li><a class="dropdown-item" href="/">Chinese</a></li>
+            <li><a class="dropdown-item" href="{% url 'chinese' %}">Chinese</a></li>
             <li><a class="dropdown-item" href="/">Hindi</a></li>
             <li><a class="dropdown-item" href="/">Spanish</a></li>
             <li><a class="dropdown-item" href="/">French</a></li>
@@ -70,16 +70,16 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="getpatch">GetPatch</a>
+          <a class="nav-link active" href="{% url 'chinesegetpatch' %}">GetPatch</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="usepatch">UsePatch</a>
+          <a class="nav-link active" href="{% url 'chineseusepatch' %}">UsePatch</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="details">Theory</a>
+          <a class="nav-link active" href="{% url 'chinesedetails' %}">Theory</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link {% if request.resolver_match.url_name == 'cart' %} active{% endif %}" href="cart">Cart</a>
+          <a class="nav-link active" href="{% url 'chinesecart' %}">Cart</a>
         </li>
       </ul>
     </div>

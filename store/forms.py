@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from .models import User
+from .models import User,Comment,ChineseComment
 from django import forms
 
 class CustomUserForm(UserCreationForm):
@@ -19,4 +19,13 @@ class CommentForm(forms.Form):
     comment_image=forms.ImageField(required=False)
     class Meta:
         model=Comment
+        fields=['comment_body','comment_image']
+
+class ChineseCommentForm(forms.Form):
+
+    comment_body = forms.CharField(widget=forms.Textarea)
+    #product_id = forms.IntegerField(widget=forms.HiddenInput)
+    comment_image=forms.ImageField(required=False)
+    class Meta:
+        model=ChineseComment
         fields=['comment_body','comment_image']

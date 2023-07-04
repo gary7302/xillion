@@ -1,4 +1,4 @@
-{% extends 'store/layouts/base.html' %}
+{% extends 'chinese-store/layouts/base.html' %}
 {% load static %}
 {% block content %}
 <div class="container">
@@ -25,9 +25,9 @@
                     {% if item.product.quantity >= item.quantity %}
                         <label>Quantity </label>
                          <div class="input-group text-center mb-3" style="width:130px">
-                             <button class="input-group-text changeQuantity decrement-btn">-</button>
+                             <button class="input-group-text chinesechangeQuantity decrement-btn">-</button>
                              <input type="text" name="quantity" class="form-control qty-input text-center" value="1">
-                             <button class="input-group-text changeQuantity increment-btn">+</button>
+                             <button class="input-group-text chinesechangeQuantity increment-btn">+</button>
                          </div>
                     {% else %}
                     <h3>out of stock</h3>
@@ -35,12 +35,12 @@
 
                 </div>
                 <div class="col-md-2 my-auto">
-                    <button class="btn btn-danger delete-cart-item">Remove</button>
+                    <button class="btn btn-danger chinese-delete-cart-item">Remove</button>
                 </div>
             </div>
 
          {% endfor %}
-                <a href="checkout" class="btn btn-outline-success">Check Out</a>
+                <a href="{% url 'chinesecheckout' %}" class="btn btn-outline-success">Check Out</a>
         {% else %}
         <h3>Your cart is empty</h3>
         {% endif %}

@@ -1,4 +1,4 @@
-{% extends 'store/layouts/base.html' %}
+{% extends 'chinese-store/layouts/base.html' %}
 {% block content %}
 <div class="container">
     <div class="row">
@@ -6,34 +6,34 @@
             <form method="post" action="">
                 {% csrf_token %}
                 <div class="mb-3">
-                    <label for="" class="form-label">Enter Username</label>
+                    <label for="" class="form-label">輸入用戶名必須是電子郵件</label>
                     {{form.username}}
                     {% if form.errors.username %}
                     <label class="text-danger">{{ form.errors.username }}</label>
                     {% endif %}
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Enter Your Email</label>
+                    <label for="" class="form-label">輸入你的電子郵箱</label>
                     {{form.email}}
                     {% if form.errors.email %}
                     <label class="text-danger">{{ form.errors.email}}</label>
                     {% endif %}
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Enter Your Password</label>
+                    <label for="" class="form-label">輸入您的密碼</label>
                     {{form.password1}}
                     {% if form.errors.password1 %}
                     <label class="text-danger">{{ form.errors.password1 }}</label>
                     {% endif %}
                 </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Confirm Your Password</label>
+                    <label for="" class="form-label">確認你的密碼</label>
                     {{form.password2}}
                     {% if form.errors.password2 %}
                     <label class="text-danger">{{ form.errors.password2}}</label>
                     {% endif %}
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">提交</button>
             </form>
         </div>
     </div>

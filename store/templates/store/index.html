@@ -2,6 +2,15 @@
 {% block content %}
 <div class="container">
     <div class="row">
+        <div class="col-12 about">
+            <h4 class="head">About Us</h4>
+            <p>We are the American Uncle Sam Temple, located in Los Angeles, California, with branches in Taiwan. Advocate non-invasive cancer prevention and treatment, provide patients with free cancer stickers, free for life. Help cancer patients. Reduce pain and prolong life without spending a dime. Serving 50 million cancer patients worldwide, we do not accept any donations.</p>
+            <p class="para">        The founder of the association, Lini Chiang, is 71 years old. Five members of his family suffered from different cancers. Four of them have died. The average life expectancy of the deceased family members is 54 years old. Determined to use his invention to help cancer patients all over the world for free.</p>
+            <p>      The adhesive patches contain the active ingredients of herbal medicines, and are pasted on the relevant acupuncture points with nano-transdermal technology. Drugs can be delivered through the meridians to reach the cancer cells and inhibit their growth. At the same time, the symmetrical sticking method was invented, and the cold and hot patches were pasted on both sides of the symmetrical meridians, so that people's immunity can absorb these two types of medicinal properties, and automatically make effective use of them, which is better than traditional oral mixing and boiling. Herbal soup, more effective</p>
+            <p class="para1">The founder also invented www.fatebook.org, through which people's birthday information can be used to statistically analyze people's genetic defects and find ways to improve them. For example, this website can immediately find the cause of Bill Gates' Parkinson's disease, use our special patches, and after a week of sticking, you can see a significant improvement in the blood test report</p>
+            <p>        Our patches can be pasted on the acupoints on the soles of the feet, and the fever will be reduced immediately in half an hour. It is safe, effective, fast and non-invasive, and has a lot of clinical proof</p>
+            <h6 class="float-end">Info: gary7302@gmail.com , Watsapp : +1 626 474 4069 , WeChat : gary7302</h6>
+        </div>
 
          {% for data in category %}
             <div class="col-12 col-md-6 col-lg-4">
@@ -10,7 +19,7 @@
                         <img src="{{ data.image.url }}" class="w-100" />
 
                         <h5 class="card-title">{{data.name}}</h5>
-                        <a href="{% url 'type' data.slug %}" class="btn btn-primary">Go {{data.name}}</a>
+                        <a href="{% url 'cart' data.slug %}" class="btn btn-primary">Go {{data.name}}</a>
                     </div>
                 </div>
             </div>

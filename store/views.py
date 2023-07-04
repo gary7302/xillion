@@ -2,21 +2,23 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .models import *
 from datetime import datetime
+from .forms import *
+from django.http.response import HttpResponse
 
 # Create your views here.
 def home(request):
-    category=Category.objects.all()
-    return render(request,'store/index.html',{'category':category})
+    product=Product.objects.all()
+    return render(request,'store/products/index.html',{'product':product})
 
-def type(request,slug):
-    if(Category.objects.filter(slug=slug)):
-        product=Product.objects.filter(category__slug=slug)
-        category_name=Category.objects.filter(slug=slug)
-        context={'product':product,'category':category_name}
-        return render(request,'store/products/index.html',context)
-    else:
-        messages.warning(request,'No such category found')
-        return redirect('home')
+# def type(request,slug):
+#     if(Category.objects.filter(slug=slug)):
+#         product=Product.objects.filter(category__slug=slug)
+#         category_name=Category.objects.filter(slug=slug)
+#         context={'product':product,'category':category_name}
+#         return render(request,'store/products/index.html',context)
+#     else:
+#         messages.warning(request,'No such category found')
+#         return redirect('home')
 
 def comment(request,id):
     eachProduct = Product.objects.get(id=id)
@@ -39,3 +41,12 @@ def addComment(request,id):
             c.save()
             return redirect('/')
     return HttpResponse('<h1>We are unable to add your comment</h1>')
+
+def getpatch(request):
+    return render(request,'store/getpatch.html')
+
+def usepatch(request):
+    return render(request,'store/usepatch.html')
+
+def details(request):
+    return render(request,'store/details.html')
